@@ -1,0 +1,53 @@
+/* Definir a fonte padrão e o tamanho base da página */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Centralizar o conteúdo na página */
+h1 {
+    text-align: center;
+    color: #4CAF50;
+    margin-top: 50px;
+    font-size: 2.5em;
+}
+
+/* Estilização dos botões */
+button {
+    background-color: #4CAF50; /* Cor verde */
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.2em;
+    margin: 20px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Efeito de hover nos botões */
+button:hover {
+    background-color: #45a049; /* Tom mais escuro de verde */
+    transform: scale(1.05); /* Leve aumento do botão */
+}
+
+/* Estilização geral do corpo */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    text-align: center;
+}
+
+/* Deixar os botões em uma linha se houver mais de um */
+button {
+    margin: 10px;
+}

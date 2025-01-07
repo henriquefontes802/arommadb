@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produto</title>
+    <link rel="stylesheet" href="static/css/main1.css">
+</head>
+<body>
+    <h1>Inserir Produto</h1>
+
+    <!-- Formulário -->
+    <form method="POST" action="/produtos/cadastrar">
+        <label for="nomeProd">Produto:</label>
+        <input type="text" id="nomeProd" name="nomeProd">
+        <label for="qtdProd">Quantidade:</label>
+        <input type="number" id="qtdProd" name="qtdProd">
+        <label for="vlrProd">Valor:</label>
+        <input type="number" id="vlrProd" name="vlrProd" step="0.01">
+
+        
+        <button type="submit">Cadastrar</button>
+        
+    </form>
+</body>
+</html>

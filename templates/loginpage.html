@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Login</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif; /* Usando fonte moderna */
+            margin: 0;
+            background: linear-gradient(to bottom, #e0eafc, #cfdef3); /* Gradiente suave */
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center; /* Centraliza verticalmente */
+            overflow-x: hidden;
+        }
+
+        .login-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        .login-container h2 {
+            color: #333;
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Sombra no título */
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.3s ease;
+        }
+
+        .login-container input[type="text"]:focus,
+        .login-container input[type="password"]:focus {
+            border-color: #00bcd4; /* Mudança de borda ao focar */
+        }
+
+        .login-container input[type="submit"] {
+            background-color: #4CAF50; /* Cor de fundo para o botão */
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.2em;
+            font-weight: 500;
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .login-container input[type="submit"]:hover {
+            background-color: #45a049;
+            transform: translateY(-5px);
+            box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-container input[type="submit"]:active {
+            transform: translateY(0);
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-container .register {
+            margin-top: 10px;
+        }
+
+        .login-container .register a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        /* Adiciona um brilho ao passar o mouse sobre o botão */
+        .login-container input[type="submit"]::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: inherit;
+        }
+
+        .login-container input[type="submit"]:hover::before {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form action="/login" method="post">
+            <label for="username">Usuário:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" required>
+
+            <input type="submit" value="Entrar">
+        </form>
+    </div>
+</body>
+</html>

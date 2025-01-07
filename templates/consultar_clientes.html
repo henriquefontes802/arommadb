@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultar Clientes</title>
+    <link rel="stylesheet" href="static/css/consulta3.css">
+</head>
+<body>
+    <h1>Clientes</h1>
+
+    <table id="clientesTable">
+        <thead>
+            <div class="botoes-topo">
+                <button onclick="window.location.href = '/home'">Página Inicial</button>
+                <button onclick="window.location.href = '/clientes'">Atualizar</button>
+            </div>
+            <td><button class="novoCliente">Novo Cliente</button></td>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Alterar</th>
+                <th>Excluir</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in clientes %}
+                <tr>
+                    <td class="idCliente">{{ cliente[0] }}</td>
+                    <td class="nomeCliente">{{ cliente[1] }}</td>
+                    <td><button class="alterarCliente">Alterar</button></td>
+                    <td>
+                        <form action="/clientes/excluir" method="POST" style="display:inline;">
+                            <input type="hidden" name="cliente_id" value="{{ cliente[0] }}">
+                            <input type="hidden" name="cliente_nome" value="{{ cliente[1] }}">
+                            <button type="submit" class="btn-excluir">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            
+        </tbody>
+    </table>
+    <script src="/static/js/alterarCliente.js"></script>
+    <script src="/static/js/novoCliente.js"></script>
+</body>
+</html>
+

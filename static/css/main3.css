@@ -1,0 +1,92 @@
+body {
+    font-family: 'Roboto', sans-serif; /* Fonte mais moderna */
+    margin: 0; /* Remove margens padrão do body */
+    background: linear-gradient(to bottom, #e0eafc, #cfdef3); /* Gradiente suave de fundo */
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center; /* Centraliza verticalmente mesmo com pouco conteúdo */
+    overflow-x: hidden; /* Evita barra de rolagem horizontal */
+}
+
+h1 {
+    text-align: center;
+    color: #333; /* Cor mais escura para o título */
+    margin-bottom: 60px;
+    font-size: 2.5em; /* Tamanho da fonte relativo */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Sombra no texto */
+}
+
+div {
+    margin-bottom: 30px;
+    perspective: 500px; /* Adiciona perspectiva para o efeito 3D */
+}
+
+button {
+    background-color: #fff; /* Fundo branco para os botões */
+    color: #333;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: 500; /* Peso da fonte mais leve */
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15); /* Sombra mais pronunciada */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transições mais suaves */
+    transform-style: preserve-3d; /* Necessário para efeitos 3D */
+    backface-visibility: hidden; /* Evita flicker em algumas animações */
+}
+
+button:hover {
+    transform: translateY(-5px) rotateX(5deg); /* Efeito de elevação e rotação 3D */
+    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+    transform: translateY(0); /* Remove o efeito ao clicar */
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.produtos {
+    background-color: #00bcd4; /* Cor mais moderna */
+}
+
+.produtos:hover {
+    background-color: #00acc1;
+}
+
+.clientes {
+    background-color: #4caf50;
+}
+
+.clientes:hover {
+    background-color: #43a047;
+}
+
+.vendas {
+    background-color: #ff9800;
+}
+
+.vendas:hover {
+    background-color: #fb8c00;
+}
+
+/* Efeito de brilho ao passar o mouse */
+button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: inherit;
+}
+
+button:hover::before {
+    opacity: 1;
+}

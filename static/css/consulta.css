@@ -1,0 +1,68 @@
+/* Resetando margens e padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Definindo o fundo e a fonte básica */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f8f8;
+    color: #333;
+    padding: 20px;
+    margin: 0;
+}
+
+/* Título da página */
+h1 {
+    text-align: center;
+    color: #4CAF50;
+    font-size: 2.5em;
+    margin-bottom: 30px;
+}
+
+/* Estilo da tabela */
+table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse; /* Remove o espaço entre as células */
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra suave */
+}
+
+/* Estilo para os cabeçalhos */
+th {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    text-align: left;
+}
+
+/* Estilo para as células da tabela */
+td {
+    padding: 10px;
+    border: 1px solid #000000;
+    text-align: left;
+}
+
+/* Alternando cores nas linhas para melhorar a legibilidade */
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Efeito de hover para as linhas */
+tr:hover {
+    background-color: #f1f1f1;
+    transition: background-color 0.3s ease;
+}
+
+/* Responsividade para telas pequenas */
+@media screen and (max-width: 600px) {
+    table {
+        width: 100%;
+    }
+    th, td {
+        padding: 8px;
+    }
+}

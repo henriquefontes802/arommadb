@@ -1,0 +1,104 @@
+/* consulta.css */
+body {
+    font-family: sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4; /* Cor de fundo suave */
+    color: #333; /* Cor do texto principal */
+}
+
+h1 {
+    text-align: center;
+    color: #007bff; /* Cor azul para o título */
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave na tabela */
+    background-color: white; /* Fundo branco para a tabela */
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd; /* Linha de separação entre as linhas */
+}
+
+th {
+    background-color: #007bff; /* Cor de fundo para o cabeçalho */
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+tr:hover {
+    background-color: #f5f5f5; /* Efeito de hover nas linhas */
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s ease; /* Transição suave na cor de fundo */
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+.novoCliente{
+    background-color: #28a745;
+}
+
+.novoProduto{
+    background-color: #28a745;
+}
+
+.novaVenda{
+    background-color: #28a745;
+}
+
+.novoCliente:hover{
+    background-color: #218838;
+}
+
+.novoProduto:hover{
+    background-color: #218838;
+}
+
+.novaVenda:hover{
+    background-color: #218838;
+}
+
+.alterarCliente{
+    background-color: #ffc107;
+    color: black;
+}
+.alterarCliente:hover{
+    background-color: #e0a800;
+}
+
+.btn-excluir {
+    background-color: #dc3545; /* Cor vermelha para o botão de excluir */
+}
+
+.btn-excluir:hover {
+    background-color: #bd2130;
+}
+
+/* Estilos para telas menores */
+@media (max-width: 600px) {
+    table {
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 8px 10px;
+    }
+}
+
