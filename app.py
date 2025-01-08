@@ -21,7 +21,7 @@ app.secret_key = 'chave#secreta#aromma#123HJ'
 
 @app.route("/")
 def loginpage():
-    return render_template("loginpage.html")
+    return render_template("home.html")
 
 @app.route("/home")
 def home():
