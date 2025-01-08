@@ -4,7 +4,7 @@ import os
 
 ####APRIMORAR A EXCLUSÃO DE PRODUTO COM JS, PARA ELE SAIR TA TABELA NA MESMA TELA E APARECER MENSAGEM DE CONFIRMAÇÃO####
 
-#DATABASE_URL = os.getenv('mysql://root:qJKZFaMxkRtYXNaagMSHDBnLZetTSGsM@viaduct.proxy.rlwy.net:11237/railway')
+DATABASE_URL = os.getenv('mysql://root:qJKZFaMxkRtYXNaagMSHDBnLZetTSGsM@viaduct.proxy.rlwy.net:11237/railway')
 
 #conecta banco de dados
 banco=mysql.connector.connect(
