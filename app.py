@@ -340,9 +340,14 @@ def excluir_cliente():
         cursor.execute(sql, (cli_id,))
         banco.commit()
         
-        return jsonify({"message": f"Cliente ID {cli_id} excluído com sucesso!"}), 200
-    except mysql.connector.Error as err:
-        return jsonify({"error": f"Erro ao excluir cliente: {err}"}), 500
+        return f"""
+        <script>
+            alert('Cliente "{cliente_nome}" excluído com sucesso!');
+            window.location.href = '/clientes';
+        </script>
+        """
+
+    
     finally:
         if 'cursor' in locals():
             cursor.close()
