@@ -346,17 +346,38 @@ def login():
     usuario = request.form['username']
     senha = request.form['password']
 
-    query = "SELECT * FROM login WHERE usuario = %s AND senha = %s"
-    cursor.execute(query, (usuario, senha))
-    
-    resultado = cursor.fetchone()
-    
-    if resultado:
-        flash('Login bem-sucedido!', 'success')
-        return render_template("home.html")  # Redirecionar para a página principal
-    else:
-        flash('Nome de usuário ou senha incorretos.', 'error')
-        return render_template("loginpage.html")  # Redirecionar de volta para a página de login
+    try:
+        # Crie uma nova conexão com o banco para esta requisição
+        banco = mysql.connector.connect(
+            host="viaduct.proxy.rlwy.net",
+            port=11237,
+            database="railway",
+            user="root",
+            password="qJKZFaMxkRtYXNaagMSHDBnLZetTSGsM"
+        )
+        cursor = banco.cursor()
+
+        # Execute a consulta
+        query = "SELECT * FROM login WHERE usuario = %s AND senha = %s"
+        cursor.execute(query, (usuario, senha))
+        resultado = cursor.fetchone()
+        
+        if resultado:
+            flash('Login bem-sucedido!', 'success')
+            return render_template("home.html")  # Redirecionar para a página principal
+        else:
+            flash('Nome de usuário ou senha incorretos.', 'error')
+            return render_template("loginpage.html")  # Redirecionar de volta para a página de login
+    except mysql.connector.Error as err:
+        print(f"Erro de conexão com o banco: {err}")
+        flash('Erro no servidor. Tente novamente mais tarde.', 'error')
+        return render_template("loginpage.html"), 500
+    finally:
+        # Feche o cursor e a conexão para evitar vazamentos
+        if 'cursor' in locals():
+            cursor.close()
+        if 'banco' in locals():
+            banco.close()
 
 if __name__ == "__main__":
     app.run(debug=True)
