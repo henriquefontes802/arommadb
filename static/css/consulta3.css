@@ -7,7 +7,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     align-items: center;
-    padding: 20px; /* Adicionado padding ao body */
+    padding: 20px;
 }
 
 h1 {
@@ -19,14 +19,16 @@ h1 {
 }
 
 table {
-    width: 90%; /* Largura da tabela */
-    max-width: 1200px; /* Largura máxima para tabelas grandes */
+    width: 90%;
+    max-width: 1200px;
     border-collapse: collapse;
     box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.15);
     background-color: white;
     margin-bottom: 40px;
-    border-radius: 8px; /* Bordas arredondadas na tabela */
-    overflow: hidden; /* Esconde o overflow para as bordas arredondadas */
+    border-radius: 8px;
+    overflow: hidden;
+    overflow-x: auto; /* Rolagem horizontal */
+    display: block; /* Necessário para o overflow funcionar */
 }
 
 th,
@@ -36,7 +38,7 @@ td {
     border-bottom: 1px solid #ddd;
 }
 
-.botoes-topo{
+.botoes-topo {
     border-bottom: 10px solid transparent;
 }
 
@@ -45,7 +47,7 @@ th {
     color: white;
     font-weight: 500;
     text-transform: uppercase;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Sombra no texto do cabeçalho */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 tr:hover {
@@ -79,7 +81,6 @@ button:active {
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Cores específicas dos botões */
 .novoCliente,
 .novoProduto,
 .novaVenda {
@@ -108,7 +109,6 @@ button:active {
     background-color: #d32f2f;
 }
 
-/* Efeito de brilho nos botões */
 button::before {
     content: "";
     position: absolute;
@@ -126,19 +126,75 @@ button:hover::before {
     opacity: 1;
 }
 
-/* Estilos para telas menores (mantido e ajustado) */
-@media (max-width: 768px) { /* Ajustado o breakpoint */
+/* Estilos para telas menores */
+@media (max-width: 768px) {
     table {
+        width: 100%;
         font-size: 14px;
-        width: 95%; /* Aumenta a largura em telas menores */
+        display: block;
+        overflow-x: auto;
     }
 
+    thead,
+    tbody,
     th,
-    td {
-        padding: 10px 12px;
+    td,
+    tr {
+        display: block;
     }
 
-    h1 {
-        font-size: 1.5em;
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
     }
+
+    tr {
+        border: 1px solid #ddd;
+        margin-bottom: 10px;
+    }
+
+    td {
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+        text-align: right;
+    }
+
+    td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+        color: #333;
+    }
+
+    button {
+        padding: 8px 12px;
+        font-size: 0.9em;
+    }
+}
+
+/* Estilos para a barra de rolagem */
+table {
+    scrollbar-width: thin;
+    scrollbar-color: #00bcd4 #f0f0f0;
+}
+
+table::-webkit-scrollbar {
+    height: 8px;
+}
+
+table::-webkit-scrollbar-thumb {
+    background-color: #00bcd4;
+    border-radius: 4px;
+}
+
+table::-webkit-scrollbar-track {
+    background-color: #f0f0f0;
 }
