@@ -343,8 +343,8 @@ def excluir_venda():
 
 @app.route('/login', methods=['POST'])
 def login():
-    usuario = request.form['username']
-    senha = request.form['password']
+    usuario = request.form['usuario']
+    senha = request.form['senha']
 
     try:
         # Crie uma nova conexão com o banco para esta requisição
