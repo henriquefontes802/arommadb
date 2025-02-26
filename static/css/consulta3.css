@@ -7,7 +7,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     align-items: center;
-    padding: 20px; /* Adicionado padding ao body */
+    padding: 20px;
 }
 
 h1 {
@@ -18,25 +18,30 @@ h1 {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-table {
-    width: 90%; /* Largura da tabela */
-    max-width: 1200px; /* Largura máxima para tabelas grandes */
-    border-collapse: collapse;
-    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.15);
-    background-color: white;
+.table-container {
+    width: 90%;
+    max-width: 1200px;
+    overflow-x: auto;
     margin-bottom: 40px;
-    border-radius: 8px; /* Bordas arredondadas na tabela */
-    overflow: hidden; /* Esconde o overflow para as bordas arredondadas */
+    border-radius: 8px;
+    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-th,
-td {
+table {
+    width: 100%;
+    min-width: 800px;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+th, td {
     padding: 15px 20px;
     text-align: left;
     border-bottom: 1px solid #ddd;
+    white-space: nowrap;
 }
 
-.botoes-topo{
+.botoes-topo {
     border-bottom: 10px solid transparent;
 }
 
@@ -45,7 +50,7 @@ th {
     color: white;
     font-weight: 500;
     text-transform: uppercase;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Sombra no texto do cabeçalho */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 tr:hover {
@@ -63,77 +68,42 @@ button {
     font-weight: 500;
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
-    position: relative;
-    overflow: hidden;
 }
 
 button:hover {
-    transform: translateY(-3px) rotateX(3deg);
+    transform: translateY(-3px);
     box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-button:active {
-    transform: translateY(0);
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Cores específicas dos botões */
 .novoCliente,
 .novoProduto,
 .novaVenda {
     background-color: #4caf50;
+    color: white;
 }
 
-.novoCliente:hover,
-.novoProduto:hover,
-.novaVenda:hover {
-    background-color: #43a047;
-}
-
-.alterarCliente {
+.alterarCliente,
+.alterarVenda {
     background-color: #ff9800;
-}
-
-.alterarCliente:hover {
-    background-color: #fb8c00;
+    color: white;
 }
 
 .btn-excluir {
     background-color: #f44336;
+    color: white;
 }
 
-.btn-excluir:hover {
-    background-color: #d32f2f;
-}
-
-/* Efeito de brilho nos botões */
-button::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 50%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    border-radius: inherit;
-}
-
-button:hover::before {
-    opacity: 1;
-}
-
-@media (max-width: 768px) { /* Ajustado o breakpoint */
+@media (max-width: 768px) {
+    .table-container {
+        width: 95%;
+    }
+    
     table {
+        min-width: 700px;
         font-size: 14px;
-        width: 95%; /* Aumenta a largura em telas menores */
     }
 
-    th,
-    td {
+    th, td {
         padding: 10px 12px;
     }
 
@@ -142,23 +112,23 @@ button:hover::before {
     }
 }
 
-
 @media (max-width: 480px) {
+    .table-container {
+        width: 100%;
+        border-radius: 0;
+    }
+    
     table {
-        font-size: 10px; /* Reduz ainda mais o tamanho da fonte */
+        min-width: 600px;
+        font-size: 12px;
     }
 
-    th,
-    td {
-        padding: 6px 8px; /* Reduz ainda mais o padding das células */
-    }
-
-    h1 {
-        font-size: 1.2em; /* Reduz ainda mais o tamanho do título */
+    th, td {
+        padding: 8px 10px;
     }
 
     button {
-        padding: 6px 10px; /* Reduz ainda mais o padding dos botões */
-        font-size: 0.8em; /* Reduz ainda mais o tamanho da fonte dos botões */
+        padding: 6px 10px;
+        font-size: 0.8em;
     }
 }
