@@ -1,4 +1,3 @@
-####APRIMORAR A EXCLUSÃO DE PRODUTO COM JS, PARA ELE SAIR TA TABELA NA MESMA TELA E APARECER MENSAGEM DE CONFIRMAÇÃO####
 import mysql.connector
 from flask import Flask, render_template, request, jsonify, flash
 import os
@@ -8,23 +7,6 @@ from urllib.parse import urlparse
 
 DATABASE_URL = os.getenv('DATABASE_URL''mysql://root:qJKZFaMxkRtYXNaagMSHDBnLZetTSGsM@viaduct.proxy.rlwy.net:11237/railway')
 url = urlparse(DATABASE_URL)
-
-# Obtenha as credenciais do banco de dados das variáveis de ambiente
-#host = os.getenv('MYSQL_HOST')
-#port = os.getenv('MYSQL_PORT')
-#database = os.getenv('MYSQL_DATABASE')
-#user = os.getenv('MYSQL_USER')
-#password = os.getenv('MYSQL_PASSWORD')
-
-# Conecta ao banco de dados usando as credenciais do ambiente
-#banco = mysql.connector.connect(
-    #host=host,
-    #port=int(port),
-    #database=database,
-    #user=user,
-    #password=password
-#)
-
 #conecta banco de dados
 banco=mysql.connector.connect(
     host="viaduct.proxy.rlwy.net",         # Substitua por 'MYSQLHOST' real
@@ -33,6 +15,7 @@ banco=mysql.connector.connect(
     user="root",         # Substitua por 'MYSQLUSER' real
     password="qJKZFaMxkRtYXNaagMSHDBnLZetTSGsM"
 )
+
 cursor = banco.cursor()
 app = Flask(__name__)
 app.secret_key = 'chave#secreta#aromma#123HJ'
