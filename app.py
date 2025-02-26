@@ -501,11 +501,10 @@ def alterar_venda():
 
 @app.route('/vendas/excluir', methods=['POST'])
 def excluir_venda():
-    data = request.get_json()
-    vnd_id = data.get('vnd_id')
-    vnd_cliente = data.get('vnd_cli')
-    vnd_qtd = data.get('vnd_qtd')
-    vnd_produto = data.get('vnd_prod')
+    vnd_id = request.form['vnd_id']
+    vnd_cliente = request.form['vnd_cli']
+    vnd_qtd = request.form['vnd_qtd']
+    vnd_produto = request.form['vnd_prod']
 
     try:
         banco = mysql.connector.connect(
@@ -530,9 +529,12 @@ def excluir_venda():
         cursor.execute(sql, (vnd_id,))
         banco.commit()
         
-        return jsonify({"message": f"Venda do cliente '{vnd_cliente}' de {vnd_qtd} {vnd_produto} excluída com sucesso!"}), 200
-    except mysql.connector.Error as err:
-        return jsonify({"error": f"Erro ao excluir venda: {err}"}), 500
+        return f"""
+        <script>
+            alert('Venda do cliente "{vnd_cliente}" de {vnd_qtd} {vnd_produto} excluído com sucesso!');
+            window.location.href = '/vendas';
+        </script>
+        """
     finally:
         if 'cursor' in locals():
             cursor.close()
