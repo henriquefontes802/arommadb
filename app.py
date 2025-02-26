@@ -216,6 +216,16 @@ def excluir_produto():
         if 'banco' in locals():
             banco.close()
 
+@app.route('/produtos/excluir/<int:produto_id>', methods=['DELETE'])
+def excluir_produto_confirmado(produto_id):
+    # Comando SQL para excluir o produto
+    sql = "DELETE FROM produtos WHERE prod_id = %s"
+    cursor.execute(sql, (produto_id,))
+    
+    banco.commit()
+
+    return '', 200  # Retorna um status 200 OK se a exclusão for bem-sucedida
+
 @app.route("/clientes/disponiveis", methods=["GET"])
 def clientes_disponiveis():
     try:
