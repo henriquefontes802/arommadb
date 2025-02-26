@@ -9,40 +9,51 @@
 <body>
     <h1>Clientes</h1>
 
-    <table id="clientesTable">
-        <thead>
-            <div class="botoes-topo">
-                <button onclick="window.location.href = '/home'">Página Inicial</button>
-                <button onclick="window.location.href = '/clientes'">Atualizar</button>
-            </div>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Alterar</th>
-                <th>Excluir</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for cliente in clientes %}
+    <div class="table-container">
+        <table id="clientesTable">
+            <thead>
+                <div class="botoes-topo">
+                    <button onclick="window.location.href = '/home'">Página Inicial</button>
+                    <button onclick="window.location.href = '/clientes'">Atualizar</button>
+                </div>
                 <tr>
-                    <td class="idCliente">{{ cliente[0] }}</td>
-                    <td class="nomeCliente">{{ cliente[1] }}</td>
-                    <td><button class="alterarCliente">Alterar</button></td>
-                    <td>
-                        <form action="/clientes/excluir" method="POST" style="display:inline;">
-                            <input type="hidden" name="cliente_id" value="{{ cliente[0] }}">
-                            <input type="hidden" name="cliente_nome" value="{{ cliente[1] }}">
-                            <button type="submit" class="btn-excluir">Excluir</button>
-                        </form>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Alterar</th>
+                    <th>Excluir</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cliente in clientes %}
+                    <tr>
+                        <td class="idCliente">{{ cliente[0] }}</td>
+                        <td class="nomeCliente">{{ cliente[1] }}</td>
+                        <td><button class="alterarCliente">Alterar</button></td>
+                        <td>
+                            <form action="/clientes/excluir" method="POST" style="display:inline;">
+                                <input type="hidden" name="cliente_id" value="{{ cliente[0] }}">
+                                <input type="hidden" name="cliente_nome" value="{{ cliente[1] }}">
+                                <button type="submit" class="btn-excluir" onclick="return confirmarExclusao(this)">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="4" style="text-align: center;">
+                        <button class="novoCliente" onclick="window.location.href='/novo_cliente'">Novo Cliente</button>
                     </td>
                 </tr>
-            {% endfor %}
-            <tr><button class="novoCliente">Novo Cliente</button></tr>
-            
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
+
     <script src="/static/js/alterarCliente.js"></script>
     <script src="/static/js/novoCliente.js"></script>
+
+    <script>
+    function confirmarExclusao(botao) {
+        return confirm("Tem certeza que deseja excluir este cliente?");
+    }
+    </script>
 </body>
 </html>
-
