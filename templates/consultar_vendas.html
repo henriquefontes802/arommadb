@@ -15,7 +15,6 @@
                 <button onclick="window.location.href = '/home'">Página Inicial</button>
                 <button onclick="window.location.href = '/vendas'">Atualizar</button>
             </div>
-            <td><button class="novaVenda">Nova Venda</button></td>
             <tr>
                 <th>ID</th>
                 <th>Cliente</th>
@@ -51,6 +50,7 @@
 
                 </tr>
             {% endfor %}
+            <tr><button class="novaVenda">Nova Venda</button></tr>
         </tbody>
     </table>
     <script src="/static/js/alterarVenda.js"></script>
