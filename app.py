@@ -1,10 +1,13 @@
+####APRIMORAR A EXCLUSÃO DE PRODUTO COM JS, PARA ELE SAIR TA TABELA NA MESMA TELA E APARECER MENSAGEM DE CONFIRMAÇÃO####
 import mysql.connector
 from flask import Flask, render_template, request, jsonify, flash
 import os
+from urllib.parse import urlparse
 
 ####APRIMORAR A EXCLUSÃO DE PRODUTO COM JS, PARA ELE SAIR TA TABELA NA MESMA TELA E APARECER MENSAGEM DE CONFIRMAÇÃO####
 
-DATABASE_URL = os.getenv('mysql://root:qJKZFaMxkRtYXNaagMSHDBnLZetTSGsM@viaduct.proxy.rlwy.net:11237/railway')
+DATABASE_URL = os.getenv('DATABASE_URL''mysql://root:qJKZFaMxkRtYXNaagMSHDBnLZetTSGsM@viaduct.proxy.rlwy.net:11237/railway')
+url = urlparse(DATABASE_URL)
 
 # Obtenha as credenciais do banco de dados das variáveis de ambiente
 #host = os.getenv('MYSQL_HOST')
