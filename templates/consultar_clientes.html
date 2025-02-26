@@ -9,6 +9,9 @@
 <body>
     <h1>Clientes</h1>
 
+    <!-- Mensagens de feedback -->
+    <div id="mensagem" style="display: none; margin: 10px 0; padding: 10px; border-radius: 5px;"></div>
+
     <div class="table-container">
         <table id="clientesTable">
             <thead>
@@ -38,22 +41,24 @@
                         </td>
                     </tr>
                 {% endfor %}
-                <tr>
-                    <td colspan="4" style="text-align: center;">
-                        <button class="novoCliente" onclick="window.location.href='/novo_cliente'">Novo Cliente</button>
-                    </td>
-                </tr>
             </tbody>
         </table>
     </div>
 
+    <!-- Botão para mostrar o formulário de cadastro -->
+    <button class="novoCliente" onclick="mostrarFormulario()">Novo Cliente</button>
+
+    <!-- Formulário de cadastro (inicialmente oculto) -->
+    <div id="formContainer" style="display: none; margin: 20px auto; max-width: 500px;">
+        <h2>Novo Cliente</h2>
+        <form id="formNovoCliente">
+            <input type="text" id="novoClienteInput" placeholder="Nome do Cliente" required>
+            <button type="submit">Adicionar</button>
+            <button type="button" onclick="ocultarFormulario()">Cancelar</button>
+        </form>
+    </div>
+
     <script src="/static/js/alterarCliente.js"></script>
     <script src="/static/js/novoCliente.js"></script>
-
-    <script>
-    function confirmarExclusao(botao) {
-        return confirm("Tem certeza que deseja excluir este cliente?");
-    }
-    </script>
 </body>
 </html>
