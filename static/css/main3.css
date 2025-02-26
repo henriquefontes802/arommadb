@@ -90,3 +90,21 @@ button::before {
 button:hover::before {
     opacity: 1;
 }
+
+/* Ajustes para telas menores que 768px (celulares) */
+@media (max-width: 768px) {
+    body {
+        padding: 20px; /* Adiciona um espaçamento interno para evitar elementos colados na borda */
+        justify-content: flex-start; /* Evita que tudo fique muito centralizado no mobile */
+    }
+
+    h1 {
+        font-size: 2em; /* Reduz o tamanho do título no celular */
+        margin-bottom: 40px; /* Menos espaçamento */
+    }
+
+    button {
+        font-size: 1em; /* Botões menores */
+        padding: 12px 20px; /* Reduz tamanho dos botões */
+    }
+}
