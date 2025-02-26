@@ -3,49 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consultar Clientes</title>
+    <title>Consultar Produtos</title>
     <link rel="stylesheet" href="static/css/consulta3.css">
 </head>
 <body>
     <h1>Produtos</h1>
 
-    <table id="produtosTable">
-        <thead>
-            <div class="botoes-topo">
-                <button onclick="window.location.href = '/home'">Página Inicial</button>
-                <button onclick="window.location.href = '/produtos'">Atualizar</button>
-            </div>
-            <tr>
-                <th>ID</th>
-                <th>Produto</th>
-                <th>Quantidade</th>
-                <th>Valor</th>
-                <th>Alterar</th>
-                <th>Excluir</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for produto in produtos %}
+    <div class="table-container">
+        <table id="produtosTable">
+            <thead>
+                <div class="botoes-topo">
+                    <button onclick="window.location.href = '/home'">Página Inicial</button>
+                    <button onclick="window.location.href = '/produtos'">Atualizar</button>
+                </div>
                 <tr>
-                    <td class="idProduto">{{ produto[0] }}</td>
-                    <td class="nomeProduto">{{ produto[1] }}</td>
-                    <td class="qtdProduto">{{ produto[2] }}</td>
-                    <td class="vlrProduto">{{ produto[3] }}</td>
-                    <td><button class="alterarProduto">Alterar</button></td>
-                    <td>
-                        <form action="/produtos/excluir" method="POST" style="display:inline;">
-                            <input type="hidden" name="produto_id" value="{{ produto[0] }}">
-                            <input type="hidden" name="produto_nome" value="{{produto[1]}}">
-                            <button type="submit" class="btn-excluir">Excluir</button>
-                        </form>
-                    </td>
-
+                    <th>ID</th>
+                    <th>Produto</th>
+                    <th>Quantidade</th>
+                    <th>Valor</th>
+                    <th>Alterar</th>
+                    <th>Excluir</th>
                 </tr>
-            {% endfor %}
-            <tr><button class="novoProduto">Novo Produto</button></tr>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for produto in produtos %}
+                    <tr>
+                        <td class="idProduto">{{ produto[0] }}</td>
+                        <td class="nomeProduto">{{ produto[1] }}</td>
+                        <td class="qtdProduto">{{ produto[2] }}</td>
+                        <td class="vlrProduto">{{ produto[3] }}</td>
+                        <td><button class="alterarProduto">Alterar</button></td>
+                        <td>
+                            <form action="/produtos/excluir" method="POST" style="display:inline;">
+                                <input type="hidden" name="produto_id" value="{{ produto[0] }}">
+                                <input type="hidden" name="produto_nome" value="{{ produto[1] }}">
+                                <button type="submit" class="btn-excluir" onclick="return confirmarExclusao(this)">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="6" style="text-align: center;">
+                        <button class="novoProduto" onclick="window.location.href='/novo_produto'">Novo Produto</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
     <script src="/static/js/alterarProduto.js"></script>
     <script src="/static/js/novoProduto.js"></script>
+
+    <script>
+    function confirmarExclusao(botao) {
+        return confirm("Tem certeza que deseja excluir este produto?");
+    }
+    </script>
 </body>
 </html>
