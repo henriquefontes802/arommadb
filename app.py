@@ -175,8 +175,8 @@ def alterar_prod():
 
 @app.route('/produtos/excluir', methods=['POST'])
 def excluir_produto():
-    data = request.get_json()
-    produto_id = data.get('produto_id')
+    produto_id = request.form['produto_id']
+    produto_nome = request.form['produto_nome']
 
     try:
         banco = mysql.connector.connect(
@@ -188,13 +188,28 @@ def excluir_produto():
         )
         cursor = banco.cursor()
 
-        sql = "DELETE FROM produtos WHERE prod_id = %s"
-        cursor.execute(sql, (produto_id,))
-        banco.commit()
-        
-        return jsonify({"message": f"Produto ID {produto_id} excluído com sucesso!"}), 200
-    except mysql.connector.Error as err:
-        return jsonify({"error": f"Erro ao excluir produto: {err}"}), 500
+        return f"""
+        <script>
+            if (confirm('Tem certeza que deseja excluir o produto "{produto_nome}"?')) {{
+                // Se o usuário confirmar, então a exclusão será feita
+                fetch('/produtos/excluir/{produto_id}', {{
+                    method: 'DELETE',
+                }})
+                .then(response => {{
+                    if (response.ok) {{
+                        alert('Produto "{produto_nome}" excluído com sucesso!');
+                        window.location.href = '/produtos'; // Redireciona para a página de lista de produtos
+                    }} else {{
+                        alert('Erro ao excluir o produto.');
+                    }}
+                }});
+            }} else {{
+                // Se o usuário cancelar, apenas redireciona para a página de produtos
+                window.location.href = '/produtos';
+            }}
+        </script>
+        """
+    
     finally:
         if 'cursor' in locals():
             cursor.close()
