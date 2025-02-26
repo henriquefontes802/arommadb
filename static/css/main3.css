@@ -1,56 +1,63 @@
 body {
-    font-family: 'Roboto', sans-serif; /* Fonte mais moderna */
-    margin: 0; /* Remove margens padrão do body */
-    background: linear-gradient(to bottom, #e0eafc, #cfdef3); /* Gradiente suave de fundo */
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    background: linear-gradient(to bottom, #e0eafc, #cfdef3);
     color: #333;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     align-items: center;
-    justify-content: center; /* Centraliza verticalmente mesmo com pouco conteúdo */
-    overflow-x: hidden; /* Evita barra de rolagem horizontal */
+    justify-content: center;
+    overflow-x: hidden;
 }
 
 h1 {
     text-align: center;
-    color: #333; /* Cor mais escura para o título */
+    color: #333;
     margin-bottom: 60px;
-    font-size: 2.5em; /* Tamanho da fonte relativo */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Sombra no texto */
+    font-size: 2.5em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-div {
-    margin-bottom: 30px;
-    perspective: 500px; /* Adiciona perspectiva para o efeito 3D */
+.buttons-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os botões quebrem para a linha de baixo */
+    justify-content: center;
+    gap: 15px; /* Espaçamento entre os botões */
+    max-width: 90%; /* Evita que fiquem muito espalhados */
 }
 
 button {
-    background-color: #fff; /* Fundo branco para os botões */
+    position: relative; /* Para o efeito de brilho funcionar corretamente */
+    background-color: #fff;
     color: #333;
     padding: 15px 25px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     font-size: 1.2em;
-    font-weight: 500; /* Peso da fonte mais leve */
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15); /* Sombra mais pronunciada */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transições mais suaves */
-    transform-style: preserve-3d; /* Necessário para efeitos 3D */
-    backface-visibility: hidden; /* Evita flicker em algumas animações */
+    font-weight: 500;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    min-width: 180px; /* Garante um tamanho mínimo para os botões */
 }
 
+/* Efeito ao passar o mouse */
 button:hover {
-    transform: translateY(-5px) rotateX(5deg); /* Efeito de elevação e rotação 3D */
+    transform: translateY(-5px) rotateX(5deg);
     box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 button:active {
-    transform: translateY(0); /* Remove o efeito ao clicar */
+    transform: translateY(0);
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Cores dos botões */
 .produtos {
-    background-color: #00bcd4; /* Cor mais moderna */
+    background-color: #00bcd4;
 }
 
 .produtos:hover {
@@ -91,20 +98,16 @@ button:hover::before {
     opacity: 1;
 }
 
-/* Ajustes para telas menores que 768px (celulares) */
+/* Ajustes para telas menores */
 @media (max-width: 768px) {
-    body {
-        padding: 20px; /* Adiciona um espaçamento interno para evitar elementos colados na borda */
-        justify-content: flex-start; /* Evita que tudo fique muito centralizado no mobile */
-    }
-
-    h1 {
-        font-size: 2em; /* Reduz o tamanho do título no celular */
-        margin-bottom: 40px; /* Menos espaçamento */
+    .buttons-container {
+        flex-direction: column; /* No celular, os botões ficam um abaixo do outro */
+        align-items: center;
+        width: 100%;
     }
 
     button {
-        font-size: 1em; /* Botões menores */
-        padding: 12px 20px; /* Reduz tamanho dos botões */
+        width: 90%; /* Os botões ocupam quase toda a largura da tela */
+        max-width: 300px; /* Evita que fiquem muito largos */
     }
 }
