@@ -126,75 +126,18 @@ button:hover::before {
     opacity: 1;
 }
 
-/* Estilos para telas menores */
-@media (max-width: 768px) {
+@media (max-width: 768px) { /* Ajustado o breakpoint */
     table {
-        width: 100%;
         font-size: 14px;
-        display: block;
-        overflow-x: auto;
+        width: 95%; /* Aumenta a largura em telas menores */
     }
 
-    thead,
-    tbody,
     th,
-    td,
-    tr {
-        display: block;
-    }
-
-    thead tr {
-        position: absolute;
-        top: -9999px;
-        left: -9999px;
-    }
-
-    tr {
-        border: 1px solid #ddd;
-        margin-bottom: 10px;
-    }
-
     td {
-        border: none;
-        border-bottom: 1px solid #eee;
-        position: relative;
-        padding-left: 50%;
-        text-align: right;
+        padding: 10px 12px;
     }
 
-    td::before {
-        content: attr(data-label);
-        position: absolute;
-        left: 10px;
-        width: 45%;
-        padding-right: 10px;
-        white-space: nowrap;
-        text-align: left;
-        font-weight: bold;
-        color: #333;
+    h1 {
+        font-size: 1.5em;
     }
-
-    button {
-        padding: 8px 12px;
-        font-size: 0.9em;
-    }
-}
-
-/* Estilos para a barra de rolagem */
-table {
-    scrollbar-width: thin;
-    scrollbar-color: #00bcd4 #f0f0f0;
-}
-
-table::-webkit-scrollbar {
-    height: 8px;
-}
-
-table::-webkit-scrollbar-thumb {
-    background-color: #00bcd4;
-    border-radius: 4px;
-}
-
-table::-webkit-scrollbar-track {
-    background-color: #f0f0f0;
 }
