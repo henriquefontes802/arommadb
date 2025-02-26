@@ -323,8 +323,8 @@ def alterar_cliente():
 
 @app.route('/clientes/excluir', methods=['POST'])
 def excluir_cliente():
-    data = request.get_json()
-    cli_id = data.get('cliente_id')
+    cli_id = request.form['cliente_id']
+    cliente_nome = request.form['cliente_nome']
 
     try:
         banco = mysql.connector.connect(
