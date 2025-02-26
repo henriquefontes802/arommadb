@@ -1,62 +1,81 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const novoProdutoBtn = document.querySelector(".novoProduto");
-    const produtosTable = document.querySelector("#produtosTable tbody");
+    const formContainer = document.getElementById("formContainer");
+    const formNovoProduto = document.getElementById("formNovoProduto");
+    const mensagem = document.getElementById("mensagem");
 
-    novoProdutoBtn.addEventListener("click", () => {
-        // Esconder o botão "Novo Produto"
-        novoProdutoBtn.style.display = "none";
+    // Mostrar formulário
+    window.mostrarFormulario = () => {
+        formContainer.style.display = "block";
+    };
 
-        // Criar uma nova linha editável
-        const newRow = document.createElement("tr");
-        newRow.innerHTML = `
-            <td></td>
-            <td><input type="text" id="novoProdutoInput" placeholder="Produto"></td>
-            <td><input type="number" id="novaqtdProdutoInput" placeholder="Quantidade"></td>
-            <td><input type="number" step="0.01" id="novovlrProdutoInput" placeholder="Valor"></td>
-            <td><button id="adicionarProduto">Adicionar</button></td>
-        `;
-        produtosTable.appendChild(newRow);
+    // Ocultar formulário
+    window.ocultarFormulario = () => {
+        formContainer.style.display = "none";
+        mensagem.style.display = "none";
+    };
 
-        // Adicionar evento ao botão "Adicionar"
-        const adicionarBtn = newRow.querySelector("#adicionarProduto");
-        adicionarBtn.addEventListener("click", async () => {
-            const inputnovoProduto = newRow.querySelector("#novoProdutoInput");
-            const inputnovaqtdProduto = newRow.querySelector("#novaqtdProdutoInput");
-            const inputnovovlrProduto = newRow.querySelector("#novovlrProdutoInput");
-            const nomeProduto = inputnovoProduto.value.trim();
-            const qtdProduto = inputnovaqtdProduto.value.trim();
-            const vlrProduto = inputnovovlrProduto.value.trim();
+    // Enviar formulário
+    formNovoProduto.addEventListener("submit", async (event) => {
+        event.preventDefault(); // Evitar recarregamento da página
 
-            if (nomeProduto, qtdProduto, vlrProduto) {
-                // Enviar o nome do produto para o servidor
-                try {
-                    const response = await fetch("/produtos/cadastrar", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({ prod_nome: nomeProduto, prod_qtd: qtdProduto, prod_valor: vlrProduto })
-                    });
+        const inputNome = document.getElementById("novoProdutoInput");
+        const inputQtd = document.getElementById("novaqtdProdutoInput");
+        const inputVlr = document.getElementById("novovlrProdutoInput");
 
-                    if (response.ok) {
-                        alert("Produto cadastrado com sucesso!");
-                        // Remover a linha e reexibir o botão "Novo Produto"
-                        newRow.remove();
-                        novoProdutoBtn.style.display = "inline"; // Ou "block", dependendo do estilo desejado
+        const nomeProduto = inputNome.value.trim();
+        const qtdProduto = inputQtd.value.trim();
+        const vlrProduto = inputVlr.value.trim();
 
-                    } else {
-                        alert("Erro ao cadastrar o produto.");
-                    }
+        if (nomeProduto && qtdProduto && vlrProduto) {
+            try {
+                const response = await fetch("/produtos/cadastrar", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        prod_nome: nomeProduto,
+                        prod_qtd: qtdProduto,
+                        prod_valor: vlrProduto
+                    })
+                });
 
-                    window.location.href = '/produtos'
-                    
-                } catch (error) {
-                    console.error("Erro:", error);
-                    alert("Erro ao se conectar com o servidor.");
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Feedback de sucesso
+                    mensagem.textContent = `Produto "${data.message}" cadastrado com sucesso!`;
+                    mensagem.style.backgroundColor = "#d4edda";
+                    mensagem.style.color = "#155724";
+                    mensagem.style.display = "block";
+
+                    // Limpar o formulário
+                    inputNome.value = "";
+                    inputQtd.value = "";
+                    inputVlr.value = "";
+                    ocultarFormulario();
+
+                    // Recarregar a lista de produtos
+                    window.location.reload();
+                } else {
+                    // Feedback de erro
+                    mensagem.textContent = `Erro: ${data.error}`;
+                    mensagem.style.backgroundColor = "#f8d7da";
+                    mensagem.style.color = "#721c24";
+                    mensagem.style.display = "block";
                 }
-            } else {
-                alert("Por favor, insira um dado válido.");
+            } catch (error) {
+                console.error("Erro:", error);
+                mensagem.textContent = "Erro ao se conectar com o servidor.";
+                mensagem.style.backgroundColor = "#f8d7da";
+                mensagem.style.color = "#721c24";
+                mensagem.style.display = "block";
             }
-        });
+        } else {
+            mensagem.textContent = "Por favor, preencha todos os campos.";
+            mensagem.style.backgroundColor = "#fff3cd";
+            mensagem.style.color = "#856404";
+            mensagem.style.display = "block";
+        }
     });
 });
