@@ -18,15 +18,22 @@ h1 {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-table {
-    width: 90%; /* Largura da tabela */
-    max-width: 1200px; /* Largura máxima para tabelas grandes */
-    border-collapse: collapse;
+/* Container da tabela para permitir rolagem horizontal */
+.table-container {
+    width: 90%; /* Largura do container */
+    max-width: 1200px; /* Largura máxima */
+    overflow-x: auto; /* Rolagem horizontal */
     box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.15);
-    background-color: white;
+    border-radius: 8px; /* Bordas arredondadas */
+    background-color: white; /* Fundo branco */
     margin-bottom: 40px;
-    border-radius: 8px; /* Bordas arredondadas na tabela */
-    overflow: hidden; /* Esconde o overflow para as bordas arredondadas */
+}
+
+table {
+    width: 100%; /* Largura da tabela */
+    border-collapse: collapse;
+    background-color: white;
+    min-width: 800px; /* Largura mínima da tabela (ajuste conforme necessário) */
 }
 
 th,
@@ -34,9 +41,10 @@ td {
     padding: 15px 20px;
     text-align: left;
     border-bottom: 1px solid #ddd;
+    white-space: nowrap; /* Impede que o texto quebre em várias linhas */
 }
 
-.botoes-topo{
+.botoes-topo {
     border-bottom: 10px solid transparent;
 }
 
@@ -127,9 +135,12 @@ button:hover::before {
 }
 
 @media (max-width: 768px) { /* Ajustado o breakpoint */
+    .table-container {
+        width: 95%; /* Aumenta a largura em telas menores */
+    }
+
     table {
         font-size: 14px;
-        width: 95%; /* Aumenta a largura em telas menores */
     }
 
     th,
