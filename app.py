@@ -178,6 +178,30 @@ def excluir_produto():
     produto_id = request.form['produto_id']
     produto_nome = request.form['produto_nome']
 
+    return f"""
+    <script>
+        if (confirm('Tem certeza que deseja excluir o produto "{produto_nome}"?')) {{
+            // Se o usuário confirmar, faz a requisição para excluir o produto
+            fetch('/produtos/excluir/{produto_id}', {{
+                method: 'DELETE',
+            }})
+            .then(response => {{
+                if (response.ok) {{
+                    alert('Produto "{produto_nome}" excluído com sucesso!');
+                    window.location.href = '/produtos'; // Redireciona para a página de produtos
+                }} else {{
+                    alert('Erro ao excluir o produto.');
+                }}
+            }});
+        }} else {{
+            // Se o usuário cancelar, redireciona de volta para a página de produtos
+            window.location.href = '/produtos';
+        }}
+    </script>
+    """
+
+@app.route('/produtos/excluir/<int:produto_id>', methods=['DELETE'])
+def excluir_produto_confirmado(produto_id):
     try:
         banco = mysql.connector.connect(
             host="viaduct.proxy.rlwy.net",
@@ -188,35 +212,24 @@ def excluir_produto():
         )
         cursor = banco.cursor()
 
-        return f"""
-        <script>
-            if (confirm('Tem certeza que deseja excluir o produto "{produto_nome}"?')) {{
-                // Se o usuário confirmar, então a exclusão será feita
-                fetch('/produtos/excluir/{produto_id}', {{
-                    method: 'DELETE',
-                }})
-                .then(response => {{
-                    if (response.ok) {{
-                        alert('Produto "{produto_nome}" excluído com sucesso!');
-                        window.location.href = '/produtos'; // Redireciona para a página de lista de produtos
-                    }} else {{
-                        alert('Erro ao excluir o produto.');
-                    }}
-                }});
-            }} else {{
-                // Se o usuário cancelar, apenas redireciona para a página de produtos
-                window.location.href = '/produtos';
-            }}
-        </script>
-        """
-    
+        # Verifica se o produto existe
+        cursor.execute("SELECT prod_id FROM produtos WHERE prod_id = %s", (produto_id,))
+        if not cursor.fetchone():
+            return jsonify({"error": "Produto não encontrado"}), 404
+
+        # Executa a exclusão
+        sql = "DELETE FROM produtos WHERE prod_id = %s"
+        cursor.execute(sql, (produto_id,))
+        banco.commit()
+
+        return '', 200  # Retorna um status 200 OK se a exclusão for bem-sucedida
+    except mysql.connector.Error as err:
+        return jsonify({"error": f"Erro ao excluir produto: {err}"}), 500
     finally:
         if 'cursor' in locals():
             cursor.close()
         if 'banco' in locals():
-            banco.close()
-
-@app.route('/produtos/excluir/<int:produto_id>', methods=['DELETE'])
+            banco.close()@app.route('/produtos/excluir/<int:produto_id>', methods=['DELETE'])
 def excluir_produto_confirmado(produto_id):
 
     
