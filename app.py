@@ -218,6 +218,18 @@ def excluir_produto():
 
 @app.route('/produtos/excluir/<int:produto_id>', methods=['DELETE'])
 def excluir_produto_confirmado(produto_id):
+
+    
+    try:
+        banco = mysql.connector.connect(
+            host="viaduct.proxy.rlwy.net",
+            port=11237,
+            database="railway",
+            user="root",
+            password="qJKZFaMxkRtYXNaagMSHDBnLZetTSGsM"
+        )
+        cursor = banco.cursor()
+
     # Comando SQL para excluir o produto
     sql = "DELETE FROM produtos WHERE prod_id = %s"
     cursor.execute(sql, (produto_id,))
