@@ -32,7 +32,7 @@ banco=mysql.connector.connect(
     database="railway", # Substitua por 'MYSQLDATABASE' real
     user="root",         # Substitua por 'MYSQLUSER' real
     password="qJKZFaMxkRtYXNaagMSHDBnLZetTSGsM"
-
+)
 cursor = banco.cursor()
 app = Flask(__name__)
 app.secret_key = 'chave#secreta#aromma#123HJ'
