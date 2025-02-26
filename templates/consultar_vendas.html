@@ -9,64 +9,63 @@
 <body>
     <h1>Vendas</h1>
 
-    <table id="vendasTable">
-        <thead>
-            <div class="botoes-topo">
-                <button onclick="window.location.href = '/home'">Página Inicial</button>
-                <button onclick="window.location.href = '/vendas'">Atualizar</button>
-            </div>
-            <tr>
-                <th>ID</th>
-                <th>Cliente</th>
-                <th>Produtos</th>
-                <th>Quantidade</th>
-                <th>Valor</th>
-                <th>Valor Total</th>
-                <th>Data</th>
-                <th>Alterar</th>
-                <th>Excluir</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for venda in vendas %}
+    <div class="table-container">
+        <table id="vendasTable">
+            <thead>
+                <div class="botoes-topo">
+                    <button onclick="window.location.href = '/home'">Página Inicial</button>
+                    <button onclick="window.location.href = '/vendas'">Atualizar</button>
+                </div>
                 <tr>
-                    <td class="idVenda">{{ venda[0] }}</td>
-                    <td class="clienteVenda">{{ venda[1] }}</td>
-                    <td class="produtoVenda">{{ venda[2] }}</td>
-                    <td class="qtdVenda">{{ venda[3] }}</td>
-                    <td class="vlrVenda">{{ venda[4] }}</td>
-                    <td class="vlrTotalVenda">{{ venda[5] }}</td>
-                    <td class="dataVenda">{{ venda[6] }}</td>
-                    <td><button class="alterarVenda">Alterar</button></td>
-                    <td>
-                        <form action="/vendas/excluir" method="POST" style="display:inline;">
-                            <input type="hidden" name="vnd_id" value="{{ venda[0] }}">
-                            <input type="hidden" name="vnd_cli" value="{{ venda[1] }}">
-                            <input type="hidden" name="vnd_prod" value="{{ venda[2] }}">
-                            <input type="hidden" name="vnd_qtd" value="{{ venda[3] }}">
-                            <button type="submit" class="btn-excluir" onclick="return confirmarExclusao(this)">Excluir</button>
-                        </form>
-                    </td>
-
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>Produtos</th>
+                    <th>Quantidade</th>
+                    <th>Valor</th>
+                    <th>Valor Total</th>
+                    <th>Data</th>
+                    <th>Alterar</th>
+                    <th>Excluir</th>
                 </tr>
-            {% endfor %}
-            <tr><button class="novaVenda">Nova Venda</button></tr>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for venda in vendas %}
+                    <tr>
+                        <td class="idVenda">{{ venda[0] }}</td>
+                        <td class="clienteVenda">{{ venda[1] }}</td>
+                        <td class="produtoVenda">{{ venda[2] }}</td>
+                        <td class="qtdVenda">{{ venda[3] }}</td>
+                        <td class="vlrVenda">{{ venda[4] }}</td>
+                        <td class="vlrTotalVenda">{{ venda[5] }}</td>
+                        <td class="dataVenda">{{ venda[6] }}</td>
+                        <td><button class="alterarVenda">Alterar</button></td>
+                        <td>
+                            <form action="/vendas/excluir" method="POST" style="display:inline;">
+                                <input type="hidden" name="vnd_id" value="{{ venda[0] }}">
+                                <input type="hidden" name="vnd_cli" value="{{ venda[1] }}">
+                                <input type="hidden" name="vnd_prod" value="{{ venda[2] }}">
+                                <input type="hidden" name="vnd_qtd" value="{{ venda[3] }}">
+                                <button type="submit" class="btn-excluir" onclick="return confirmarExclusao(this)">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="9" style="text-align: center;">
+                        <button class="novaVenda" onclick="window.location.href='/nova_venda'">Nova Venda</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
     <script src="/static/js/alterarVenda.js"></script>
     <script src="/static/js/novaVenda.js"></script>
 
     <script>
-    
-        function confirmarExclusao(botao) {
-            if (confirm("Tem certeza que deseja excluir esta venda?")) {
-                return true; // Permite o envio do formulário
-            } else {
-                return false; // Impede o envio do formulário
-            }
+    function confirmarExclusao(botao) {
+        return confirm("Tem certeza que deseja excluir esta venda?");
     }
-        </script>
-    
-
+    </script>
 </body>
 </html>
