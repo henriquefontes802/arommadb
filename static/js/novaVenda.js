@@ -1,36 +1,26 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const novoVendaBtn = document.querySelector(".novaVenda");
-    const vendasTable = document.querySelector("#vendasTable tbody");
+    const novaVendaBtn = document.querySelector(".novaVenda");
+    const formNovaVendaRow = document.getElementById("formNovaVendaRow");
+    const mensagem = document.getElementById("mensagem");
 
-    novoVendaBtn.addEventListener("click", async () => {
+    // Mostrar formulário
+    window.mostrarFormulario = () => {
+        formNovaVendaRow.style.display = "table-row"; // Exibe a linha do formulário
+        novaVendaBtn.style.display = "none"; // Oculta o botão "Nova Venda"
+        carregarClientes();
+        carregarProdutos();
+    };
 
-        novoVendaBtn.style.display = "none";
+    // Ocultar formulário
+    window.ocultarFormulario = () => {
+        formNovaVendaRow.style.display = "none"; // Oculta a linha do formulário
+        novaVendaBtn.style.display = "inline"; // Exibe o botão "Nova Venda"
+        mensagem.style.display = "none"; // Oculta a mensagem de feedback
+    };
 
-        const newRow = document.createElement("tr");
-        newRow.innerHTML = `
-            <td></td>
-            <td>
-                <select id="novoClienteVendaInput">
-                    <option value="">Selecione um cliente</option>
-                </select>
-            </td>
-            <td>
-                <select id="novoProdutoVendaInput">
-                    <option value="">Selecione um produto</option>
-                </select>
-            </td>
-            <td><input type="number" id="novaQtdVendaInput" placeholder="Quantidade"></td>
-            <td><input type="number" step="0.01" id="novoVlrVendaInput" placeholder="Valor"></td>
-            <td></td>
-            <td><input type="date" id="novaDataVenda" placeholder="Data"></td>
-            <td><button id="adicionarVenda">Adicionar</button></td>
-        `;
-        vendasTable.appendChild(newRow);
-
-        const clienteSelect = newRow.querySelector("#novoClienteVendaInput");
-        const produtoSelect = newRow.querySelector("#novoProdutoVendaInput");
-        const adicionarBtn = newRow.querySelector("#adicionarVenda");
-    
+    // Carregar clientes disponíveis
+    async function carregarClientes() {
+        const clienteSelect = document.getElementById("novoClienteVendaInput");
         try {
             const response = await fetch("/clientes/disponiveis");
             if (response.ok) {
@@ -47,7 +37,11 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (error) {
             console.error("Erro ao buscar clientes:", error);
         }
+    }
 
+    // Carregar produtos disponíveis
+    async function carregarProdutos() {
+        const produtoSelect = document.getElementById("novoProdutoVendaInput");
         try {
             const response = await fetch("/produtos/disponiveis");
             if (response.ok) {
@@ -64,52 +58,73 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (error) {
             console.error("Erro ao buscar produtos:", error);
         }
+    }
 
-        adicionarBtn.addEventListener("click", async () => {
-            const inputnovoClienteVenda = newRow.querySelector("#novoClienteVendaInput");
-            //const inputnovoProdutoVenda = newRow.querySelector("#novoProdutoVendaInput");
-            const inputnovaQtdVenda = newRow.querySelector("#novaQtdVendaInput");
-            const inputnovoVlrVenda = newRow.querySelector("#novoVlrVendaInput");
-            const inputnovaDatavenda = newRow.querySelector("#novaDataVenda");
+    // Adicionar evento ao botão "Adicionar"
+    const adicionarBtn = document.getElementById("adicionarVenda");
+    adicionarBtn.addEventListener("click", async () => {
+        const clienteSelect = document.getElementById("novoClienteVendaInput");
+        const produtoSelect = document.getElementById("novoProdutoVendaInput");
+        const inputQtd = document.getElementById("novaQtdVendaInput");
+        const inputVlr = document.getElementById("novoVlrVendaInput");
+        const inputData = document.getElementById("novaDataVenda");
 
-            const NomeClienteVenda = inputnovoClienteVenda.value.trim();
-            const ProdutoVenda = produtoSelect.value.trim();
-            const QtdVenda = inputnovaQtdVenda.value.trim();
-            const VlrVenda = inputnovoVlrVenda.value.trim();
-            const DataVenda = inputnovaDatavenda.value.trim();
+        const cliente = clienteSelect.value.trim();
+        const produto = produtoSelect.value.trim();
+        const qtd = inputQtd.value.trim();
+        const vlr = inputVlr.value.trim();
+        const data = inputData.value.trim();
 
-         
-            if (NomeClienteVenda, ProdutoVenda, QtdVenda, VlrVenda, DataVenda) {
-       
-                try {
-                    const response = await fetch("/vendas/cadastrar", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        
-                        body: JSON.stringify({ vnd_cliente: NomeClienteVenda, vnd_produto: ProdutoVenda, vnd_qtd: QtdVenda, vnd_valor: VlrVenda, vnd_data: DataVenda })
-                    });
+        if (cliente && produto && qtd && vlr && data) {
+            try {
+                const response = await fetch("/vendas/cadastrar", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        vnd_cliente: cliente,
+                        vnd_produto: produto,
+                        vnd_qtd: qtd,
+                        vnd_valor: vlr,
+                        vnd_data: data
+                    })
+                });
 
-                    if (response.ok) {
-                        alert("Venda cadastrada com sucesso!");
-                        
-                        newRow.remove();
-                        novoVendaBtn.style.display = "inline";
+                const dataResponse = await response.json();
 
-                    } else {
-                        alert("Erro ao cadastrar venda.");
-                    }
+                if (response.ok) {
+                    // Feedback de sucesso
+                    mensagem.textContent = `Venda cadastrada com sucesso!`;
+                    mensagem.style.backgroundColor = "#d4edda";
+                    mensagem.style.color = "#155724";
+                    mensagem.style.display = "block";
 
-                    window.location.href = '/vendas'
-                    
-                } catch (error) {
-                    console.error("Erro:", error);
-                    alert("Erro ao se conectar com o servidor.");
+                    // Limpar o formulário
+                    clienteSelect.value = "";
+                    produtoSelect.value = "";
+                    inputQtd.value = "";
+                    inputVlr.value = "";
+                    inputData.value = "";
+                    ocultarFormulario();
+
+                    // Recarregar a lista de vendas
+                    window.location.reload();
+                } else {
+                    // Feedback de erro
+                    mensagem.textContent = `Erro: ${dataResponse.error}`;
+                    mensagem.style.backgroundColor = "#f8d7da";
+                    mensagem.style.color = "#721c24";
+                    mensagem.style.display = "block";
                 }
-            } else {
-                alert("Por favor, insira um dado válido.");
+            } catch (error) {
+                console.error("Erro:", error);
+                mensagem.textContent = "Erro ao se conectar com o servidor.";
+                mensagem.style.backgroundColor = "#f8d7da";
+                mensagem.style.color = "#721c24";
+                mensagem.style.display = "block";
             }
-        });
-    });
-});
+        } else {
+            mensagem.textContent = "Por favor, preencha todos os campos.";
+            mensagem.style.backgroundColor = "#fff3cd";
+            mensagem.style.color =
