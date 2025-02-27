@@ -45,24 +45,23 @@
                         </td>
                     </tr>
                 {% endfor %}
+                <!-- Linha do formulário de cadastro (inicialmente oculta) -->
+                <tr id="formNovoProdutoRow" style="display: none;">
+                    <td></td>
+                    <td><input type="text" id="novoProdutoInput" placeholder="Nome do Produto"></td>
+                    <td><input type="number" id="novaqtdProdutoInput" placeholder="Quantidade"></td>
+                    <td><input type="number" step="0.01" id="novovlrProdutoInput" placeholder="Valor"></td>
+                    <td colspan="2">
+                        <button id="adicionarProduto">Adicionar</button>
+                        <button onclick="ocultarFormulario()">Cancelar</button>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
 
     <!-- Botão para mostrar o formulário de cadastro -->
     <button class="novoProduto" onclick="mostrarFormulario()">Novo Produto</button>
-
-    <!-- Formulário de cadastro (inicialmente oculto) -->
-    <div id="formContainer" style="display: none; margin: 20px auto; max-width: 500px;">
-        <h2>Novo Produto</h2>
-        <form id="formNovoProduto">
-            <input type="text" id="novoProdutoInput" placeholder="Nome do Produto" required>
-            <input type="number" id="novaqtdProdutoInput" placeholder="Quantidade" required>
-            <input type="number" step="0.01" id="novovlrProdutoInput" placeholder="Valor" required>
-            <button type="submit">Adicionar</button>
-            <button type="button" onclick="ocultarFormulario()">Cancelar</button>
-        </form>
-    </div>
 
     <script src="/static/js/alterarProduto.js"></script>
     <script src="/static/js/novoProduto.js"></script>
