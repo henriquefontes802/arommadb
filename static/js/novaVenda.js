@@ -127,4 +127,8 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             mensagem.textContent = "Por favor, preencha todos os campos.";
             mensagem.style.backgroundColor = "#fff3cd";
-            mensagem.style.color =
+            mensagem.style.color = "#856404";
+            mensagem.style.display = "block";
+        }
+    });
+});
