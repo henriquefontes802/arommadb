@@ -41,22 +41,21 @@
                         </td>
                     </tr>
                 {% endfor %}
+                <!-- Linha do formulário de cadastro (inicialmente oculta) -->
+                <tr id="formNovoClienteRow" style="display: none;">
+                    <td></td>
+                    <td><input type="text" id="novoClienteInput" placeholder="Nome do Cliente"></td>
+                    <td colspan="2">
+                        <button id="adicionarCliente">Adicionar</button>
+                        <button onclick="ocultarFormulario()">Cancelar</button>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
 
     <!-- Botão para mostrar o formulário de cadastro -->
     <button class="novoCliente" onclick="mostrarFormulario()">Novo Cliente</button>
-
-    <!-- Formulário de cadastro (inicialmente oculto) -->
-    <div id="formContainer" style="display: none; margin: 20px auto; max-width: 500px;">
-        <h2>Novo Cliente</h2>
-        <form id="formNovoCliente">
-            <input type="text" id="novoClienteInput" placeholder="Nome do Cliente" required>
-            <button type="submit">Adicionar</button>
-            <button type="button" onclick="ocultarFormulario()">Cancelar</button>
-        </form>
-    </div>
 
     <script src="/static/js/alterarCliente.js"></script>
     <script src="/static/js/novoCliente.js"></script>
