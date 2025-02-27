@@ -1,23 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const formContainer = document.getElementById("formContainer");
-    const formNovoProduto = document.getElementById("formNovoProduto");
+    const novoProdutoBtn = document.querySelector(".novoProduto");
+    const formNovoProdutoRow = document.getElementById("formNovoProdutoRow");
     const mensagem = document.getElementById("mensagem");
 
     // Mostrar formulário
     window.mostrarFormulario = () => {
-        formContainer.style.display = "block";
+        formNovoProdutoRow.style.display = "table-row"; // Exibe a linha do formulário
+        novoProdutoBtn.style.display = "none"; // Oculta o botão "Novo Produto"
     };
 
     // Ocultar formulário
     window.ocultarFormulario = () => {
-        formContainer.style.display = "none";
-        mensagem.style.display = "none";
+        formNovoProdutoRow.style.display = "none"; // Oculta a linha do formulário
+        novoProdutoBtn.style.display = "inline"; // Exibe o botão "Novo Produto"
+        mensagem.style.display = "none"; // Oculta a mensagem de feedback
     };
 
-    // Enviar formulário
-    formNovoProduto.addEventListener("submit", async (event) => {
-        event.preventDefault(); // Evitar recarregamento da página
-
+    // Adicionar evento ao botão "Adicionar"
+    const adicionarBtn = document.getElementById("adicionarProduto");
+    adicionarBtn.addEventListener("click", async () => {
         const inputNome = document.getElementById("novoProdutoInput");
         const inputQtd = document.getElementById("novaqtdProdutoInput");
         const inputVlr = document.getElementById("novovlrProdutoInput");
