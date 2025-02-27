@@ -1,25 +1,26 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const formContainer = document.getElementById("formContainer");
-    const formNovoCliente = document.getElementById("formNovoCliente");
+    const novoClienteBtn = document.querySelector(".novoCliente");
+    const formNovoClienteRow = document.getElementById("formNovoClienteRow");
     const mensagem = document.getElementById("mensagem");
 
     // Mostrar formulário
     window.mostrarFormulario = () => {
-        formContainer.style.display = "block";
+        formNovoClienteRow.style.display = "table-row"; // Exibe a linha do formulário
+        novoClienteBtn.style.display = "none"; // Oculta o botão "Novo Cliente"
     };
 
     // Ocultar formulário
     window.ocultarFormulario = () => {
-        formContainer.style.display = "none";
-        mensagem.style.display = "none";
+        formNovoClienteRow.style.display = "none"; // Oculta a linha do formulário
+        novoClienteBtn.style.display = "inline"; // Exibe o botão "Novo Cliente"
+        mensagem.style.display = "none"; // Oculta a mensagem de feedback
     };
 
-    // Enviar formulário
-    formNovoCliente.addEventListener("submit", async (event) => {
-        event.preventDefault(); // Evitar recarregamento da página
-
-        const input = document.getElementById("novoClienteInput");
-        const nomeCliente = input.value.trim();
+    // Adicionar evento ao botão "Adicionar"
+    const adicionarBtn = document.getElementById("adicionarCliente");
+    adicionarBtn.addEventListener("click", async () => {
+        const inputNome = document.getElementById("novoClienteInput");
+        const nomeCliente = inputNome.value.trim();
 
         if (nomeCliente) {
             try {
@@ -41,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     mensagem.style.display = "block";
 
                     // Limpar o formulário
-                    input.value = "";
+                    inputNome.value = "";
                     ocultarFormulario();
 
                     // Recarregar a lista de clientes
