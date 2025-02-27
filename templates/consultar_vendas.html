@@ -9,6 +9,9 @@
 <body>
     <h1>Vendas</h1>
 
+    <!-- Mensagens de feedback -->
+    <div id="mensagem" style="display: none; margin: 10px 0; padding: 10px; border-radius: 5px;"></div>
+
     <div class="table-container">
         <table id="vendasTable">
             <thead>
@@ -50,22 +53,36 @@
                         </td>
                     </tr>
                 {% endfor %}
-                <tr>
-                    <td colspan="9" style="text-align: center;">
-                        <button class="novaVenda" onclick="window.location.href='/nova_venda'">Nova Venda</button>
+                <!-- Linha do formulário de cadastro (inicialmente oculta) -->
+                <tr id="formNovaVendaRow" style="display: none;">
+                    <td></td>
+                    <td>
+                        <select id="novoClienteVendaInput">
+                            <option value="">Selecione um cliente</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select id="novoProdutoVendaInput">
+                            <option value="">Selecione um produto</option>
+                        </select>
+                    </td>
+                    <td><input type="number" id="novaQtdVendaInput" placeholder="Quantidade"></td>
+                    <td><input type="number" step="0.01" id="novoVlrVendaInput" placeholder="Valor"></td>
+                    <td></td>
+                    <td><input type="date" id="novaDataVenda"></td>
+                    <td colspan="2">
+                        <button id="adicionarVenda">Adicionar</button>
+                        <button onclick="ocultarFormulario()">Cancelar</button>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
 
+    <!-- Botão para mostrar o formulário de cadastro -->
+    <button class="novaVenda" onclick="mostrarFormulario()">Nova Venda</button>
+
     <script src="/static/js/alterarVenda.js"></script>
     <script src="/static/js/novaVenda.js"></script>
-
-    <script>
-    function confirmarExclusao(botao) {
-        return confirm("Tem certeza que deseja excluir esta venda?");
-    }
-    </script>
 </body>
 </html>
